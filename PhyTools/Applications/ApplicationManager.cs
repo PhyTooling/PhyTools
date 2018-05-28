@@ -1,4 +1,5 @@
-﻿using PhyTools.Applications.TestForm;
+﻿using PhyTools.Applications.ServiceManagers;
+using PhyTools.Applications.TestForm;
 using PhyTools.Delegates;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,11 @@ namespace PhyTools.Applications
                     TestFormUserControl testFormUserControl = new TestFormUserControl();
                     testFormUserControl.PrintToConsoleEvent += printToConsole;
                     userControl = testFormUserControl;
+                    break;
+                case "ServiceManager":
+                    ServiceManagerUserControl serviceManagerUserControl = new ServiceManagerUserControl();
+                    serviceManagerUserControl.PrintToConsoleEvent += printToConsole;
+                    userControl = serviceManagerUserControl;
                     break;
                 default:
                     break;
