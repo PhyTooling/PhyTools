@@ -64,28 +64,35 @@ namespace PhyTools
         /// <param name="e"></param>
         private void Button_Click_SelectApplication(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            if (button == null)
+            try
             {
-                return;
-            }
+                var button = sender as Button;
+                if (button == null)
+                {
+                    return;
+                }
 
-            var content = button.Content as string;
-            var userControl = ApplicationManager.GetUserControl(content, new PrintToConsole(OnPrintToConsoleEvent));
-            if (userControl == null)
-            {
-                PrintToConsole(string.Format("No User control setup for this name {0}", content));
-                return;
-            }
-            else if (userControl == CurrentSelectedUserControl)
-            {
-                PrintToConsole("You have already selected this user control.");
-                return;
-            }
+                var content = button.Content as string;
+                var userControl = ApplicationManager.GetUserControl(content, new PrintToConsole(OnPrintToConsoleEvent));
+                if (userControl == null)
+                {
+                    PrintToConsole(string.Format("No User control setup for this name {0}", content));
+                    return;
+                }
+                else if (userControl == CurrentSelectedUserControl)
+                {
+                    PrintToConsole("You have already selected this user control.");
+                    return;
+                }
 
-            PrintToConsole(string.Format("Selecting User control {0}", content));
-            ApplicationContainerGrid.Children.Clear();
-            ApplicationContainerGrid.Children.Add(userControl);
+                PrintToConsole(string.Format("Selecting User control {0}", content));
+                ApplicationContainerGrid.Children.Clear();
+                ApplicationContainerGrid.Children.Add(userControl);
+            }
+            catch (Exception exception)
+            {
+                PrintToConsole(string.Format("Failed to load application. {0}", exception));
+            }
         }
 
         /// <summary>
