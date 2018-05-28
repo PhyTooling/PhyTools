@@ -34,15 +34,6 @@
                 <StackPanel>
                     <Button Content="TestForm" Click="Button_Click_SelectApplication" />
                     <Button Content="ServiceManager" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
-                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
                 </StackPanel>
             </Grid>
         </ScrollViewer>
