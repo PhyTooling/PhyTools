@@ -35,7 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,6 +57,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Applications\ServiceManagers\PhyToolsServiceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Applications\ServiceManagers\ServiceWindow.xaml.cs">
+      <DependentUpon>ServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\ServiceManagers\WindowsApplicationServiceManager.cs" />
+    <Compile Include="Extentions\ServiceControllerExtentions.cs" />
+    <Compile Include="Images\IconConverter.cs" />
+    <Compile Include="RelayCommands\RelayCommand.cs" />
+    <Page Include="Applications\ServiceManagers\ServiceManagerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\ServiceManagers\ServiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Applications\TestForm\TestFormUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,6 +88,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Applications\ApplicationManager.cs" />
+    <Compile Include="Applications\ServiceManagers\Contracts\WindowsApplicationService.cs" />
+    <Compile Include="Applications\ServiceManagers\ServiceManagerUserControl.xaml.cs">
+      <DependentUpon>ServiceManagerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\ServiceManagers\ViewModels\ServiceManagerViewModel.cs" />
+    <Compile Include="Applications\ServiceManagers\ViewModels\ViewModel.cs" />
     <Compile Include="Applications\TestForm\TestFormUserControl.xaml.cs">
       <DependentUpon>TestFormUserControl.xaml</DependentUpon>
     </Compile>
@@ -110,6 +137,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\50x50\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@
         xmlns:menu="clr-namespace:PhyTools.Menu"
         xmlns:testform="clr-namespace:PhyTools.Applications.TestForm"
         mc:Ignorable="d"
-        Title="PhyTools" Height="800" Width="1000">
+        Title="PhyTools" Height="800" Width="1280">
 
     <Grid>
         <!--Rows-->
@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
-        
+
         <!--Columns-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
@@ -33,27 +33,27 @@
             <Grid>
                 <StackPanel>
                     <Button Content="TestForm" Click="Button_Click_SelectApplication" />
-                    <Button Content="C" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
-                    <Button Content="button" Click="Button_Click_SelectApplication" />
+                    <Button Content="ServiceManager" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
+                    <Button Content="Test Button" Click="Button_Click_SelectApplication" />
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-        
+
         <!-- slider -->
         <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch"  ResizeBehavior="PreviousAndNext" Width="5" Background="#FFBCBCBC"/>
 
 
         <ScrollViewer x:Name="ApplicationContainer" Grid.Column="2" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Grid x:Name="ApplicationContainerGrid">
-               
+
             </Grid>
         </ScrollViewer>
 
@@ -64,7 +64,7 @@
         <!-- contents -->
         <ScrollViewer x:Name="ScrollViewerLogs" Grid.ColumnSpan="3" Grid.Row="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Grid>
-                <RichTextBox x:Name="RichTextBoxConsoleLog" Background="#FFFFEEEA" IsReadOnly="False" >
+                <RichTextBox x:Name="RichTextBoxConsoleLog" Background="#FFFFEEEA" IsReadOnly="False" Grid.ColumnSpan="2" >
                     <FlowDocument Name="rtbFlowDoc" PageWidth="{Binding ElementName=RichTextBoxConsoleLog, Path=ActualWidth}" />
                 </RichTextBox>
             </Grid>
