@@ -34,11 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,6 +63,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Applications\JSON\Nodes\ArrayNode.cs" />
+    <Compile Include="Applications\JSON\Nodes\BranchNode.cs" />
+    <Compile Include="Applications\JSON\Nodes\DictionaryNode.cs" />
+    <Compile Include="Applications\JSON\Nodes\DictionaryWrapperForArrayListNode.cs" />
+    <Compile Include="Applications\JSON\Nodes\LeafNode.cs" />
+    <Compile Include="Applications\JSON\Nodes\RootNode.cs" />
+    <Compile Include="Applications\JSON\JSONTestObject.cs" />
+    <Compile Include="Applications\JSON\JSONUserControl.xaml.cs">
+      <DependentUpon>JSONUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\JSON\Nodes\BasicNode.cs" />
+    <Compile Include="Applications\JSON\TreeModels\TreeViewModel\ArrayNodeTreeViewModel.cs" />
+    <Compile Include="Applications\JSON\TreeModels\TreeViewModel\KeyArrayNodeTreeViewModel.cs" />
+    <Compile Include="Applications\JSON\TreeModels\TreeViewModel\KeyValueNodeContainerViewModel.cs" />
+    <Compile Include="Applications\JSON\TreeModels\TreeViewModel\KeyValueNodeTreeViewModel.cs" />
+    <Compile Include="Applications\JSON\TreeModels\TreeViewModel\ListKeyValueNodeTreeViewModel.cs" />
+    <Compile Include="Applications\JSON\TreeModels\TreeViewModel\TreeViewItemViewModel.cs" />
+    <Compile Include="Applications\JSON\TreeModels\TreeViewModel\ValueNodeTreeViewModel.cs" />
+    <Compile Include="Applications\JSON\TreeModels\ViewModels\ViewTreeModel.cs" />
+    <Compile Include="Applications\NotificationsApplication\NotificationsUserControl.xaml.cs">
+      <DependentUpon>NotificationsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\PersonalManagerApplication\PersonalManagerUserControl.xaml.cs">
+      <DependentUpon>PersonalManagerUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Applications\ServiceManagers\PhyToolsServiceInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -64,9 +95,24 @@
       <DependentUpon>ServiceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Applications\ServiceManagers\WindowsApplicationServiceManager.cs" />
+    <Compile Include="Events\NotificationCountEvent.cs" />
     <Compile Include="Extentions\ServiceControllerExtentions.cs" />
     <Compile Include="Images\IconConverter.cs" />
     <Compile Include="RelayCommands\RelayCommand.cs" />
+    <Compile Include="Taskbar\TaskbarItemOverlay.cs" />
+    <Compile Include="Taskbar\ViewModels\TaskbarItemOverlayViewModel.cs" />
+    <Page Include="Applications\JSON\JSONUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\NotificationsApplication\NotificationsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Applications\PersonalManagerApplication\PersonalManagerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Applications\ServiceManagers\ServiceManagerUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +175,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -142,6 +189,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PhyJSON\PhyJSON.csproj">
+      <Project>{a7e1c4bc-d740-409b-929d-abc88862b5fe}</Project>
+      <Name>PhyJSON</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

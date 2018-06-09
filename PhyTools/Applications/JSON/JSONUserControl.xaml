@@ -1,0 +1,149 @@
+﻿<UserControl x:Class="PhyTools.Applications.JSONApplication.JSONUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PhyTools.Applications.JSONApplication"
+             xmlns:Nodes="clr-namespace:PhyTools.Applications.JSON.Nodes"
+             xmlns:TreeViewModel="clr-namespace:PhyTools.Applications.JSON.TreeModels.TreeViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Row="1" Height="30" Name="BorderOverlay2" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2"></Rectangle>
+            <Rectangle Grid.Row="1" Height="30" Name="BackgroundColor2" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Fill="#FFF1F5FB"></Rectangle>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Button Margin="5,5,5,5" Content="Convert to JSON" Width="120" HorizontalAlignment="Left" Click="Button_Click_ToJSON" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Row="1" Height="30" Name="BorderOverlay3" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2"></Rectangle>
+            <Rectangle Grid.Row="1" Height="30" Name="BackgroundColor3" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Fill="#FFF1F5FB"></Rectangle>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Button Margin="5,5,5,5" Content="Convert Text to Tree" Width="120" HorizontalAlignment="Left" Click="Button_Click_ToTree" />
+                <Button Margin="5,5,5,5" Content="Format XML" Width="120" HorizontalAlignment="Left" Click="Button_Click_Format_XML" />
+            </StackPanel>
+        </Grid>
+
+        <TreeView Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" ItemsSource="{Binding RootTreeNodes}" Margin="0,0,0,0" Name="NewView" FontFamily="Calibri" FontSize="15" BorderBrush="#FFF1F5FB" Background="{x:Null}" BorderThickness="2" Padding="12,5,0,0" ContextMenuOpening="NewView_ContextMenuOpening">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    <Setter Property="FontWeight" Value="Normal" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu>
+                                <MenuItem Header="Add Brach" Command="{Binding AddBranchCommand}">
+                                </MenuItem>
+                                <MenuItem Header="Add Array" Command="{Binding AddArrayCommand}">
+                                </MenuItem>
+                                <MenuItem Header="Add Dictionary" Command="{Binding AddDictionaryCommand}">
+                                </MenuItem>
+                                <MenuItem Header="Delete" Command="{Binding DeleteCommand}"></MenuItem>
+                                <Separator />
+                                <MenuItem Header="Properties" Command="{Binding AddBranchCommand}"></MenuItem>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderBrush" Value="#adc6e5" />
+                            <!--<Setter Property="FontWeight" Value="Bold" />-->
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#adc6e5" />
+                            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" />
+                        </Trigger>
+                    </Style.Triggers>
+                    <Style.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="3" />
+                        </Style>
+                    </Style.Resources>
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.Resources>
+                <!-- color gradient -->
+                <LinearGradientBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFD9F4FF" Offset="0" />
+                    <GradientStop Color="#FF9BDDFB" Offset="1" />
+                </LinearGradientBrush>
+                <LinearGradientBrush x:Key="{x:Static SystemColors.ControlBrushKey}" EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFEEEDED" Offset="0" />
+                    <GradientStop Color="#FFDDDDDD" Offset="1" />
+                </LinearGradientBrush>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Black" />
+                <!--color gradient -->
+
+                <HierarchicalDataTemplate DataType="{x:Type TreeViewModel:ArrayNodeTreeViewModel}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <TextBlock Margin="0,1,0,1" MinWidth="170" Text="{Binding Value}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                
+                <HierarchicalDataTemplate DataType="{x:Type TreeViewModel:KeyArrayNodeTreeViewModel}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <TextBlock Margin="0,1,0,1" MinWidth="170" Text="{Binding Value}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type TreeViewModel:KeyValueNodeTreeViewModel}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <TextBlock Margin="0,1,0,1" MinWidth="170" Text="{Binding Value}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type TreeViewModel:ListKeyValueNodeTreeViewModel}" ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand">
+                        <TextBlock Margin="0,1,0,1" MinWidth="170" Text="{Binding Value}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <DataTemplate DataType="{x:Type TreeViewModel:ValueNodeTreeViewModel}">
+                    <StackPanel Orientation="Horizontal" Cursor="Hand" Focusable="True" ToolTip="">
+                        <!--<TextBox Margin="0,1,0,1" MinWidth="110" Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
+                        <Grid>
+                            <TextBlock MouseLeftButtonDown="txtblk_MouseDown"  Text="{Binding Value}" />
+                            <TextBox Margin="0,1,0,1" MinWidth="110" Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Collapsed" LostFocus="txtbox_LostFocus" />
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+
+
+            </TreeView.Resources>
+        </TreeView>
+
+        <!-- slider -->
+        <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch"  ResizeBehavior="PreviousAndNext" Width="5" Background="#FFBCBCBC"/>
+
+        <ScrollViewer x:Name="ScrollViewerLogs" Grid.Column="2" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <RichTextBox x:Name="RichTextBoxConsoleLog" IsReadOnly="False" Grid.ColumnSpan="2" >
+                    <FlowDocument Name="rtbFlowDoc" PageWidth="{Binding ElementName=RichTextBoxConsoleLog, Path=ActualWidth}" />
+                </RichTextBox>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

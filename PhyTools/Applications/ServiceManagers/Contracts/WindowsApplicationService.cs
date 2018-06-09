@@ -94,6 +94,7 @@ namespace PhyTools.Applications.ServiceManagers.Contracts
         public void StartMethodCommand()
         {
             //TODO:  Start - windows service
+            MessageBox.Show("Stop feature has not been added yet. Please wait for the next version.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -118,6 +119,7 @@ namespace PhyTools.Applications.ServiceManagers.Contracts
         public void StopMethodCommand()
         {
             //TODO:  Stop - windows service
+            MessageBox.Show("Stop feature has not been added yet. Please wait for the next version.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -143,6 +145,10 @@ namespace PhyTools.Applications.ServiceManagers.Contracts
         {
             try
             {
+                MessageBox.Show("Stop feature has not been added yet. Please wait for the next version.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // this is in progress
+                return;
                 ServiceWindow serviceWindow = new ServiceWindow(this);
                 serviceWindow.ShowDialog();
             }

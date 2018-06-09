@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="PhyTools.Applications.PersonalManagerApplication.PersonalManagerUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PhyTools.Applications.PersonalManagerApplication"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1000">
+    <Grid>
+        <!-- this application will list your personal applications -->
+        <!-- we can use a data grid -->
+        <DataGrid Grid.Row="2"  AutoGenerateColumns="false" HorizontalAlignment="Stretch" x:Name="DataGridWindowsApplicationServices" VerticalAlignment="Stretch" ItemsSource="{Binding WindowsApplicationServicesView}" IsReadOnly="True" FontFamily="Calibri" FontSize="15" GridLinesVisibility="None" BorderBrush="#FFF1F5FB" Background="{x:Null}" Foreground="Black" CanUserReorderColumns="False" CanUserResizeColumns="True" CanUserSortColumns="True" CanUserResizeRows="True">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Padding" Value="2" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="#adc6e5" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                        <GradientStop Color="#FFD9F4FF" Offset="0" />
+                                        <GradientStop Color="#FF9BDDFB" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="Black" />
+                            <!--<Setter Property="Foreground" Value="#5a6779"/>-->
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="ContextMenu">
+                        <Setter.Value>
+                            <ContextMenu>
+                                <MenuItem Header="Start" Command="{Binding StartCommand}"></MenuItem>
+                                <MenuItem Header="Stop" Command="{Binding StopCommand}"></MenuItem>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#adc6e5" />
+                            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Group" Binding="{Binding Group}" Width="100" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="100" />
+                <DataGridTextColumn Header="Path" Binding="{Binding Path}" Width="100" />
+                <DataGridTextColumn Header="IsRunning" Binding="{Binding IsRunning}" Width="100" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

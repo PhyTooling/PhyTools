@@ -23,6 +23,7 @@ namespace PhyTools.Applications.TestForm
     public partial class TestFormUserControl : UserControl
     {
         public event PrintToConsole PrintToConsoleEvent;
+        public event NotificationDelegate NotificationCountEvent;
 
         public TestFormUserControl()
         {
@@ -36,6 +37,28 @@ namespace PhyTools.Applications.TestForm
                 PrintToConsoleEvent.Invoke(null, new PrintToConsoleEvent()
                 {
                     Text = TextBoxPrintToConsole.Text,
+                });
+            }
+        }
+
+        private void Button_Click_IncrementNotificationCount(object sender, RoutedEventArgs e)
+        {
+            if (NotificationCountEvent != null)
+            {
+                NotificationCountEvent.Invoke(null, new NotificationCountEvent()
+                {
+                    Amount = 1,
+                });
+            }
+        }
+
+        private void Button_Click_DecrementNotificationCount(object sender, RoutedEventArgs e)
+        {
+            if (NotificationCountEvent != null)
+            {
+                NotificationCountEvent.Invoke(null, new NotificationCountEvent()
+                {
+                    Amount = -1,
                 });
             }
         }

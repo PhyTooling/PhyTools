@@ -2,6 +2,7 @@
 using PhyTools.Applications.TestForm;
 using PhyTools.Delegates;
 using PhyTools.Events;
+using PhyTools.Taskbar.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,11 @@ namespace PhyTools
         private ApplicationManager ApplicationManager = new ApplicationManager();
 
         /// <summary>
+        /// TaskbarItemOverlayViewModel
+        /// </summary>
+        private TaskbarItemOverlayViewModel TaskbarItemOverlayViewModel = new TaskbarItemOverlayViewModel();
+
+        /// <summary>
         /// Returns the SelectedUserControl
         /// </summary>
         private UserControl CurrentSelectedUserControl
@@ -54,7 +60,11 @@ namespace PhyTools
         /// </summary>
         public MainWindow()
         {
+            // Initialize
             InitializeComponent();
+
+            // Setup the Overlay
+            DataContext = TaskbarItemOverlayViewModel;
         }
 
         /// <summary>
@@ -73,7 +83,7 @@ namespace PhyTools
                 }
 
                 var content = button.Content as string;
-                var userControl = ApplicationManager.GetUserControl(content, new PrintToConsole(OnPrintToConsoleEvent));
+                var userControl = ApplicationManager.GetUserControl(content, new PrintToConsole(OnPrintToConsoleEvent), new NotificationDelegate(OnAddNotification));
                 if (userControl == null)
                 {
                     PrintToConsole(string.Format("No User control setup for this name {0}", content));
@@ -93,6 +103,16 @@ namespace PhyTools
             {
                 PrintToConsole(string.Format("Failed to load application. {0}", exception));
             }
+        }
+
+        /// <summary>
+        /// If another user controller wants to print to the console use a event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="printToConsoleEvent"></param>
+        private void OnAddNotification(object sender, NotificationCountEvent notificationCountEvent)
+        {
+            TaskbarItemOverlayViewModel.Count += notificationCountEvent.Amount;
         }
 
         /// <summary>

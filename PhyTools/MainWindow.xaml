@@ -6,9 +6,37 @@
         xmlns:local="clr-namespace:PhyTools"
         xmlns:menu="clr-namespace:PhyTools.Menu"
         xmlns:testform="clr-namespace:PhyTools.Applications.TestForm"
+        xmlns:taskbar="clr-namespace:PhyTools.Taskbar"
         mc:Ignorable="d"
         Title="PhyTools" Height="800" Width="1280">
 
+    <!--Taskbar Overlay-->
+    <Window.Resources>
+        <DataTemplate x:Key="OverlayIcon">
+            <Grid Width="16" Height="16">
+                <Ellipse 
+                    Fill="Black" 
+                    Stroke="White" 
+                    StrokeThickness=".5" />
+                <TextBlock 
+                    Text="{Binding}" 
+                    TextAlignment="Center" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    Height="16" 
+                    VerticalAlignment="Center" 
+                    FontSize="10"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo 
+            taskbar:TaskbarItemOverlay.Content="{Binding Count}" 
+            taskbar:TaskbarItemOverlay.Template="{StaticResource OverlayIcon}" />
+    </Window.TaskbarItemInfo>
+    <!--Taskbar Overlay-->
+    
     <Grid>
         <!--Rows-->
         <Grid.RowDefinitions>
@@ -20,7 +48,7 @@
 
         <!--Columns-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="120" />
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -34,6 +62,9 @@
                 <StackPanel>
                     <Button Content="TestForm" Click="Button_Click_SelectApplication" />
                     <Button Content="ServiceManager" Click="Button_Click_SelectApplication" />
+                    <Button Content="JSON Builder" Click="Button_Click_SelectApplication" />
+                    <Button Content="Application Manager" Click="Button_Click_SelectApplication" Visibility="Hidden" />
+                    <Button Content="Notifications" Click="Button_Click_SelectApplication" Visibility="Hidden" />
                 </StackPanel>
             </Grid>
         </ScrollViewer>
