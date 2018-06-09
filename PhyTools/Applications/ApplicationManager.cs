@@ -1,4 +1,7 @@
-﻿using PhyTools.Applications.ServiceManagers;
+﻿using PhyTools.Applications.JSONApplication;
+using PhyTools.Applications.NotificationsApplication;
+using PhyTools.Applications.PersonalManagerApplication;
+using PhyTools.Applications.ServiceManagers;
 using PhyTools.Applications.TestForm;
 using PhyTools.Delegates;
 using System;
@@ -26,7 +29,7 @@ namespace PhyTools.Applications
         /// <param name="text"></param>
         /// <param name="printToConsole"></param>
         /// <returns></returns>
-        public UserControl GetUserControl(string text, PrintToConsole printToConsole)
+        public UserControl GetUserControl(string text, PrintToConsole printToConsole, NotificationDelegate notificationDelegate)
         {
             UserControl userControl = null;
 
@@ -40,12 +43,28 @@ namespace PhyTools.Applications
                 case "TestForm":
                     TestFormUserControl testFormUserControl = new TestFormUserControl();
                     testFormUserControl.PrintToConsoleEvent += printToConsole;
+                    testFormUserControl.NotificationCountEvent += notificationDelegate;
                     userControl = testFormUserControl;
                     break;
                 case "ServiceManager":
                     ServiceManagerUserControl serviceManagerUserControl = new ServiceManagerUserControl();
                     serviceManagerUserControl.PrintToConsoleEvent += printToConsole;
                     userControl = serviceManagerUserControl;
+                    break;
+                case "Application Manager":
+                    PersonalManagerUserControl personalManagerUserControl = new PersonalManagerUserControl();
+                    personalManagerUserControl.PrintToConsoleEvent += printToConsole;
+                    userControl = personalManagerUserControl;
+                    break;
+                case "Notifications":
+                    NotificationsUserControl notificationsUserControl = new NotificationsUserControl();
+                    notificationsUserControl.PrintToConsoleEvent += printToConsole;
+                    userControl = notificationsUserControl;
+                    break;
+                case "JSON Builder":
+                    JSONUserControl jsonUserControl = new JSONUserControl();
+                    jsonUserControl.PrintToConsoleEvent += printToConsole;
+                    userControl = jsonUserControl;
                     break;
                 default:
                     break;

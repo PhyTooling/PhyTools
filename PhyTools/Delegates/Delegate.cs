@@ -13,4 +13,11 @@ namespace PhyTools.Delegates
     /// <param name="sender"></param>
     /// <param name="printToConsoleEvent"></param>
     public delegate void PrintToConsole(object sender, PrintToConsoleEvent printToConsoleEvent);
+
+    /// <summary>
+    /// Delegate to increment Notification count
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="printToConsoleEvent"></param>
+    public delegate void NotificationDelegate(object sender, NotificationCountEvent notificationCountEvent);
 }
