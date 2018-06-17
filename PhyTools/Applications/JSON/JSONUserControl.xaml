@@ -13,6 +13,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="1" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -36,8 +38,18 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.Row="1" Height="30" Name="BorderOverlay3" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2"></Rectangle>
-            <Rectangle Grid.Row="1" Height="30" Name="BackgroundColor3" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Fill="#FFF1F5FB"></Rectangle>
+            <Rectangle Grid.Row="1" Height="30" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2"></Rectangle>
+            <Rectangle Grid.Row="1" Height="30" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Fill="#FFF1F5FB"></Rectangle>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+            </StackPanel>
+        </Grid>
+
+    <Grid Grid.Row="0" Grid.Column="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Row="4" Height="30" Name="BorderOverlay3" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2"></Rectangle>
+            <Rectangle Grid.Row="4" Height="30" Name="BackgroundColor3" Stroke="#FFD9E3F0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Fill="#FFF1F5FB"></Rectangle>
             <StackPanel Grid.Column="0" Orientation="Horizontal">
                 <Button Margin="5,5,5,5" Content="Convert Text to Tree" Width="120" HorizontalAlignment="Left" Click="Button_Click_ToTree" />
                 <Button Margin="5,5,5,5" Content="Format XML" Width="120" HorizontalAlignment="Left" Click="Button_Click_Format_XML" />
@@ -131,14 +143,18 @@
                     </StackPanel>
                 </DataTemplate>
 
-
             </TreeView.Resources>
         </TreeView>
 
         <!-- slider -->
         <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch"  ResizeBehavior="PreviousAndNext" Width="5" Background="#FFBCBCBC"/>
 
-        <ScrollViewer x:Name="ScrollViewerLogs" Grid.Column="2" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ListView Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" />
+
+        <!-- slider -->
+        <GridSplitter Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Stretch"  ResizeBehavior="PreviousAndNext" Width="5" Background="#FFBCBCBC"/>
+
+        <ScrollViewer x:Name="ScrollViewerLogs" Grid.Column="4" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <RichTextBox x:Name="RichTextBoxConsoleLog" IsReadOnly="False" Grid.ColumnSpan="2" >
                     <FlowDocument Name="rtbFlowDoc" PageWidth="{Binding ElementName=RichTextBoxConsoleLog, Path=ActualWidth}" />

@@ -15,6 +15,7 @@ namespace PhyTools.Applications.JSON.TreeModels.TreeViewModel
             : base(null, true)
         {
             _KeyArrayNode = keyArrayNode;
+            this.IsExpanded = true;
         }
 
         public string Value
