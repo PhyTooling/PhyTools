@@ -15,11 +15,12 @@ namespace PhyTools.Applications.JSON.TreeModels.TreeViewModel
             : base(null, true)
         {
             _ArrayNode = arrayNode;
+            this.IsExpanded = true;
         }
 
         public string Value
         {
-            get { return string.Format("[{0}]", _ArrayNode.index); }
+            get { return string.Format("[{0}]", _ArrayNode.Index); }
         }
 
         protected override void LoadChildren()

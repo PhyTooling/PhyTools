@@ -150,6 +150,20 @@ namespace PhyTools.Applications.JSONApplication
             }
         }
 
+        bool Expanded = false;
+        // The event subscription method (for a button click)
+        private void ButtonExpand__Click(object sender, RoutedEventArgs e)
+        {
+            Expanded = !Expanded;
+            Style Style = new Style
+            {
+                TargetType = typeof(TreeViewItem)
+            };
+
+            Style.Setters.Add(new Setter(TreeViewItem.IsExpandedProperty, Expanded));
+            NewView.ItemContainerStyle = Style;
+        }
+
         private string RemoveChariageReturns(string value)
         {
             if (String.IsNullOrEmpty(value))
@@ -221,9 +235,10 @@ namespace PhyTools.Applications.JSONApplication
 
         private void Button_Click_Format_XML(object sender, RoutedEventArgs e)
         {
-            //string prettyJson = JToken.Parse(nodeJson).ToString(Formatting.Indented);
-            //RichTextBoxConsoleLog.Document.Blocks.Clear();
-            //RichTextBoxConsoleLog.Document.Blocks.Add(new Paragraph(new Run(prettyJson)));
+            string json2 = RemoveChariageReturns(string.Format(@"{0}", new TextRange(RichTextBoxConsoleLog.Document.ContentStart, RichTextBoxConsoleLog.Document.ContentEnd).Text));
+            string prettyJson = JToken.Parse(json2).ToString(Formatting.Indented);
+            RichTextBoxConsoleLog.Document.Blocks.Clear();
+            RichTextBoxConsoleLog.Document.Blocks.Add(new Paragraph(new Run(prettyJson)));
         }
 
         protected void txtblk_MouseDown(object sender, MouseButtonEventArgs e)

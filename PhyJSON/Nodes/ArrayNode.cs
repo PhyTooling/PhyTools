@@ -8,7 +8,7 @@ namespace PhyJSON.Nodes
 {
     public class ArrayNode : INode
     {
-        public int index { get; set; }
+        public int Index { get; set; }
         public List<INode> Values { get; set; }
     }
 }

@@ -30,5 +30,11 @@
 
         <Label Grid.Row="2" Grid.Column="0" Content="Notification:"/>
         <Button Grid.Column="1" Grid.Row="2" Margin="3" MinWidth="80" Content="Decrement Notification Count" Click="Button_Click_DecrementNotificationCount" />
+
+
+        <ListView Grid.Row="4" Grid.Column="1" x:Name="DragList"  PreviewMouseLeftButtonDown="List_PreviewMouseLeftButtonDown" PreviewMouseMove="List_MouseMove"/>
+
+        <ListView Grid.Row="4" Grid.Column="2" x:Name="DropList" Drop="DropList_Drop" DragEnter="DropList_DragEnter" AllowDrop="True" />
+
     </Grid>
 </UserControl>
